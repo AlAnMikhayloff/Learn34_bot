@@ -45,6 +45,8 @@ def talk_about_planet(update, context):
         planet.compute(datetime.today())
         update.message.reply_text(ephem.constellation(planet))
         print(ephem.constellation(planet))
+    else:
+        update.message.reply_text('Неизвестная планета.')
 
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
