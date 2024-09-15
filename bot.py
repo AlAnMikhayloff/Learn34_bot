@@ -18,9 +18,10 @@ def talk_to_me(update, context):
     update.message.reply_text(text)
 
 def talk_about_planet(update, context):
-    name_planet = update.message.text.split[6:]
+    name_planet = update.message.text.split[5:]
     update.message.reply_text(name_planet)
     mars = ephem.Mars()
+    print(name_planet)
 
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
@@ -29,6 +30,7 @@ def main():
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(CommandHandler("planet", talk_about_planet))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
+    dp.add_handler(MessageHandler(Filters.text, talk_about_planet))
 
     logging.info('Бот стартовал.')
     mybot.start_polling()
