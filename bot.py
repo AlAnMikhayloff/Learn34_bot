@@ -20,9 +20,9 @@ def talk_to_me(update, context):
 def talk_about_planet(update, context):
     name = update.message.text.split('/planet ')[1]
     update.message.reply_text(name)
-    #if name == ephem.Mars():
-    update.message.reply_text(ephem.constellation(name))
-    print(ephem.constellation(name))
+    m = ephem.Mars()
+    update.message.reply_text(ephem.constellation(m))
+    print(ephem.constellation(m))
 
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
