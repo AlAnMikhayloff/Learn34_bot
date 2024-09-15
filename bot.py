@@ -20,7 +20,7 @@ def talk_to_me(update, context):
 def talk_about_planet(update, context):
     name = update.message.text.split('/planet ')[1]
     update.message.reply_text(name)
-    if name == ephem.name():
+    if name == ephem.name('today'):
         update.message.reply_text(ephem.constellation(name))
         print(ephem.constellation(name))
 
