@@ -1,6 +1,7 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import settings
+import ephem
 
 logging.basicConfig(filename='bot.log', level=logging.INFO)
 
@@ -16,11 +17,17 @@ def talk_to_me(update, context):
     print(text)
     update.message.reply_text(text)
 
+def talk_about_planet(update, context):
+    name_planet = update.message.text.split[6:]
+    update.message.reply_text(name_planet)
+    mars = ephem.Mars()
+
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
+    dp.add_handler(CommandHandler("planet", talk_about_planet))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
 
     logging.info('Бот стартовал.')
