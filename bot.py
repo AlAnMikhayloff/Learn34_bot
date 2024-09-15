@@ -2,6 +2,7 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import settings
 import ephem
+from datetime import datetime
 
 logging.basicConfig(filename='bot.log', level=logging.INFO)
 
@@ -18,11 +19,32 @@ def talk_to_me(update, context):
     update.message.reply_text(text)
 
 def talk_about_planet(update, context):
-    name = update.message.text.split('/planet ')[1]
-    update.message.reply_text(name)
-    m = ephem.Mars()
-    update.message.reply_text(ephem.constellation(m))
-    print(ephem.constellation(m))
+    name_planet = update.message.text.split('/planet ')[1]
+    update.message.reply_text(name_planet)
+    
+
+    if name_planet.lower() == 'mars':
+        planet = ephem.Mars()
+    elif name_planet.lower() == 'venus':
+        planet = ephem.Venus()
+    elif name_planet.lower() == 'mercury':
+        planet = ephem.Mercury()
+    elif name_planet.lower() == 'saturn':
+        planet = ephem.Saturn()
+    elif name_planet.lower() == 'jupiter':
+        planet = ephem.Jupiter()
+    elif name_planet.lower() == 'uranus':
+        planet = ephem.Uranus()
+    elif name_planet.lower() == 'moon':
+        planet = ephem.Moon()
+    elif name_planet.lower() == 'neptune':
+        planet = ephem.Neptune()
+    elif name_planet.lower() == 'pluto':
+        planet = ephem.Pluto()
+        print(datetime.today())
+        planet.compute(datetime.today())
+        update.message.reply_text(ephem.constellation(planet))
+        print(ephem.constellation(planet))
 
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
