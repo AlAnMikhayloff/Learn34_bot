@@ -20,27 +20,12 @@ def talk_to_me(update, context):
 
 def talk_about_planet(update, context):
     name_planet = update.message.text.split('/planet ')[1]
-    update.message.reply_text(name_planet)
-    
+    update.message.reply_text(name_planet.capitalize())
+       
+    if name_planet.lower() == 'mars' or 'venus' or 'mercury' or 'saturn' or 'jupiter' or 'uranus' or 'moon' or 'neptune' or 'pluto':
+        planet = getattr(ephem, name_planet.capitalize())()
+        print(planet)
 
-    if name_planet.lower() == 'mars':
-        planet = ephem.Mars()
-    elif name_planet.lower() == 'venus':
-        planet = ephem.Venus()
-    elif name_planet.lower() == 'mercury':
-        planet = ephem.Mercury()
-    elif name_planet.lower() == 'saturn':
-        planet = ephem.Saturn()
-    elif name_planet.lower() == 'jupiter':
-        planet = ephem.Jupiter()
-    elif name_planet.lower() == 'uranus':
-        planet = ephem.Uranus()
-    elif name_planet.lower() == 'moon':
-        planet = ephem.Moon()
-    elif name_planet.lower() == 'neptune':
-        planet = ephem.Neptune()
-    elif name_planet.lower() == 'pluto':
-        planet = ephem.Pluto()   
     else:
         update.message.reply_text('Неизвестная планета.')
     print(datetime.today())
