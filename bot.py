@@ -40,13 +40,13 @@ def talk_about_planet(update, context):
     elif name_planet.lower() == 'neptune':
         planet = ephem.Neptune()
     elif name_planet.lower() == 'pluto':
-        planet = ephem.Pluto()
-        print(datetime.today())
-        planet.compute(datetime.today())
-        update.message.reply_text(ephem.constellation(planet))
-        print(ephem.constellation(planet))
+        planet = ephem.Pluto()   
     else:
         update.message.reply_text('Неизвестная планета.')
+    print(datetime.today())
+    planet.compute(datetime.today())
+    update.message.reply_text(ephem.constellation(planet))
+    print(planet, ephem.constellation(planet))
 
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
